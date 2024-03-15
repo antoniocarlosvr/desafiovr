@@ -1,0 +1,105 @@
+<main>
+    <br>
+    <h1 style="text-align: center; color: white;">Adicione um produto aqui</h1>
+    <div style="display: flex; justify-content: center;">
+        <button [(ngModel)]="produtoloja.produto" (click)="addProduto(produto)" type="button" data-bs-target="#teste"
+            data-bs-toggle="modal" class="btn-orange">Adicionar</button>
+        <div *ngIf="produto">
+            <div class="modal fade" id="teste" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Adicionar produto</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Nome do produto</label>
+                                <input [(ngModel)]="produto.descricao" type="text" name="descricao" class="form-control"
+                                    id="exampleFormControlInput1" placeholder="Nome">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Preço</label>
+                                <input [(ngModel)]="produto.custo" type="text" name="custo" class="form-control"
+                                    id="exampleFormControlInput1" placeholder="R$ 0,00">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" (click)="add()" class="btn-orange">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="container px-4" style="display: inline-block; /* Exibe os itens da lista em linha */
+    margin-right: 10px; /* Espaçamento entre os itens */">
+        <div class="row gx-5">
+            <div *ngFor="let produto of produtos" class="col">
+                <div>
+                    <div class="p-3">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{produto.descricao}}</h5>
+                                <h4>R$ {{produto.custo}}</h4>
+                                <div *ngIf="(produto.status == true)">
+                                    <h6 class="status-ativo">Ativo</h6>
+                                </div>
+                                <button (click)="setProduto(produto)" data-bs-target="#staticBackdrop"
+                                    data-bs-toggle="modal" class="btn-orange">Editar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="produto">
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Editar produto
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <h5>ID: {{produto.id}}</h5>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Nome do produto</label>
+                                    <input [(ngModel)]="produto.descricao" type="text" name="descricao"
+                                        class="form-control" id="exampleFormControlInput1" placeholder="Nome">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Preço</label>
+                                    <input [(ngModel)]="produto.custo" type="text" name="custo" class="form-control"
+                                        id="exampleFormControlInput1" placeholder="R$ 0,00">
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input [(ngModel)]="produto.status" name="status" class="form-check-input"
+                                        type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                                    <div *ngIf="(produto.status == true)">
+                                        <label class="form-check-label" for="flexSwitchCheckChecked">Ativo</label>
+                                    </div>
+                                    <div *ngIf="(produto.status == false)">
+                                        <label class="form-check-label" for="flexSwitchCheckChecked">Inativo</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                                <button type="submit" (click)="update(produto.id)" class="btn-orange">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

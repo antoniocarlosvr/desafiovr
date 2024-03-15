@@ -1,0 +1,113 @@
+<main>
+    <br>
+    <br>
+    <h1 style="text-align: center; color: white;">Adicione seu Produto Loja aqui</h1>
+    <div style="display: flex; justify-content: center;">
+        <button (click)="addProdutoLoja(produtoloja)" data-bs-target="#teste" data-bs-toggle="modal" type="button"
+            class="btn-orange">Adicionar</button>
+        <div *ngIf="loja.id === 0">
+            <div class="modal fade" id="teste" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Adicionar loja</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">ID da loja</label>
+                                <input [(ngModel)]="produtoloja.loja" type="text" name="loja" class="form-control"
+                                    id="exampleFormControlInput1" placeholder="Nome">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">ID do produto</label>
+                                <input [(ngModel)]="produtoloja.produto" type="text" name="produto" class="form-control"
+                                    id="exampleFormControlInput1" placeholder="Nome">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Preço da
+                                    Venda</label>
+                                <input [(ngModel)]="produtoloja.precovenda" type="text" name="precoVenda"
+                                    class="form-control" id="exampleFormControlInput" placeholder="R$ 0,00">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" (click)="add()" class="btn-orange">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="container px-4" style="display: inline-block; /* Exibe os itens da lista em linha */
+    margin-right: 10px; /* Espaçamento entre os itens */">
+        <div class="row gx-5">
+            <div *ngFor="let produtoloja of produtolojas" class="col">
+                <div class="p-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <div>
+                            </div>
+                            <h5 class="card-title">ID: {{produtoloja.id}}</h5>
+                            <h5 class="card-title">ID loja: {{produtoloja.loja}}</h5>
+                            <h5 [ngClass]="{i: produtoloja.produto}" class="card-title">ID Produto:
+                                {{produtoloja.produto}}</h5>
+                            <h5 class="card-title">Preço venda: {{produtoloja.precovenda}}</h5>
+                            <p class="card-text">
+                                <button (click)="setProdutoLoja(produtoloja)" data-bs-target="#staticBackdrop" data-bs-toggle="modal"
+                                    class="btn-orange">Editar</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="produtoloja">
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Editar Produto loja
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">ID</label>
+                            <input [(ngModel)]="produtoloja.id" type="text" name="id" class="form-control"
+                                id="exampleFormControlInput1" placeholder="Id">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">ID da loja</label>
+                            <input [(ngModel)]="produtoloja.loja" type="text" name="loja" class="form-control"
+                                id="exampleFormControlInput1" placeholder="loja">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">ID do produto</label>
+                            <input [(ngModel)]="produtoloja.produto" type="text" name="produto" class="form-control"
+                                id="exampleFormControlInput1" placeholder="produto">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Preço da
+                                Venda</label>
+                            <input [(ngModel)]="produtoloja.precovenda" type="text" name="precoVenda"
+                                class="form-control" id="exampleFormControlInput" placeholder="R$ 0,00">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                        <button type="submit" (click)="update(produtoloja.id)" class="btn-orange">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
